@@ -327,35 +327,87 @@ Sem Acessório necessário</td></tr><tr><td>Tipo de Rede</td><td>Trifásico 220/
 
 function validateForm() {
   var valid = true;
-  var fields = [
-    { id: 'nome', grp: 'grp-nome' },
-    { id: 'telefone', grp: 'grp-telefone' },
-    { id: 'empresa', grp: 'grp-empresa' },
-    { id: 'estado', grp: 'grp-estado' },
-    { id: 'cidade', grp: 'grp-cidade' },
-    { id: 'area', grp: 'grp-area' }
-  ];
   
-  fields.forEach(function(f) {
-    var el = document.getElementById(f.id);
-    var grp = document.getElementById(f.grp);
-    if (!el.value.trim()) {
-      grp.classList.add('has-error');
-      valid = false;
-    } else {
-      grp.classList.remove('has-error');
-    }
-  });
-  
-  // Validate email
-  var email = document.getElementById('email');
-  var emailGrp = document.getElementById('grp-email');
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email.value)) {
-    emailGrp.classList.add('has-error');
+  function setError(grpId, msg) {
+    var grp = document.getElementById(grpId);
+    grp.classList.add('has-error');
+    var errDiv = grp.querySelector('.error');
+    if (errDiv && msg) errDiv.textContent = msg;
     valid = false;
+  }
+  function clearError(grpId) {
+    var grp = document.getElementById(grpId);
+    grp.classList.remove('has-error');
+  }
+  
+  // Nome: minimum 5 chars, at least 2 words
+  var nome = document.getElementById('nome').value.trim();
+  if (!nome) {
+    setError('grp-nome', 'Por favor, informe seu nome completo');
+  } else if (nome.length < 5) {
+    setError('grp-nome', 'Nome muito curto (minimo 5 caracteres)');
+  } else if (nome.split(/\s+/).length < 2) {
+    setError('grp-nome', 'Informe nome e sobrenome');
   } else {
-    emailGrp.classList.remove('has-error');
+    clearError('grp-nome');
+  }
+  
+  // Telefone: at least 8 digits
+  var telefone = document.getElementById('telefone').value.trim();
+  var phoneDigits = telefone.replace(/\D/g, '');
+  if (!telefone) {
+    setError('grp-telefone', 'Por favor, informe seu telefone');
+  } else if (phoneDigits.length < 8) {
+    setError('grp-telefone', 'Telefone invalido (minimo 8 digitos)');
+  } else {
+    clearError('grp-telefone');
+  }
+  
+  // Email: valid format with proper domain
+  var email = document.getElementById('email').value.trim();
+  var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!email) {
+    setError('grp-email', 'Por favor, informe seu e-mail');
+  } else if (!emailRegex.test(email)) {
+    setError('grp-email', 'E-mail invalido (ex: nome@empresa.com.br)');
+  } else {
+    clearError('grp-email');
+  }
+  
+  // Empresa: minimum 2 chars
+  var empresa = document.getElementById('empresa').value.trim();
+  if (!empresa) {
+    setError('grp-empresa', 'Por favor, informe o nome da empresa');
+  } else if (empresa.length < 2) {
+    setError('grp-empresa', 'Nome da empresa muito curto');
+  } else {
+    clearError('grp-empresa');
+  }
+  
+  // Estado: must select
+  var estado = document.getElementById('estado').value;
+  if (!estado) {
+    setError('grp-estado', 'Por favor, selecione seu estado');
+  } else {
+    clearError('grp-estado');
+  }
+  
+  // Cidade: minimum 2 chars
+  var cidade = document.getElementById('cidade').value.trim();
+  if (!cidade) {
+    setError('grp-cidade', 'Por favor, informe sua cidade');
+  } else if (cidade.length < 2) {
+    setError('grp-cidade', 'Nome da cidade muito curto');
+  } else {
+    clearError('grp-cidade');
+  }
+  
+  // Area: must select
+  var area = document.getElementById('area').value;
+  if (!area) {
+    setError('grp-area', 'Por favor, selecione sua area ou funcao');
+  } else {
+    clearError('grp-area');
   }
   
   return valid;
