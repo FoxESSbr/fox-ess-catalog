@@ -196,17 +196,9 @@ body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Ne
         <div class="error">Por favor, selecione sua área ou função</div>
       </div>
       <div class="lead-form-group" id="grp-distribuidor">
-        <label>Qual seu distribuidor? * (selecione um ou mais)</label>
-        <div class="checkbox-group" id="distribuidor-group">
-          <label class="checkbox-item"><input type="checkbox" name="distribuidor" value="AVT"> AVT</label>
-          <label class="checkbox-item"><input type="checkbox" name="distribuidor" value="BelEnergy"> BelEnergy</label>
-          <label class="checkbox-item"><input type="checkbox" name="distribuidor" value="Bold Energy"> Bold Energy</label>
-          <label class="checkbox-item"><input type="checkbox" name="distribuidor" value="JNG"> JNG</label>
-          <label class="checkbox-item"><input type="checkbox" name="distribuidor" value="Fortlev"> Fortlev</label>
-          <label class="checkbox-item"><input type="checkbox" name="distribuidor" value="Solfacil"> Solfacil</label>
-          <label class="checkbox-item"><input type="checkbox" name="distribuidor" value="Outro"> Outro</label>
-        </div>
-        <div class="error">Por favor, selecione pelo menos um distribuidor</div>
+        <label for="distribuidor">Qual seu distribuidor? *</label>
+        <input type="text" id="distribuidor" name="distribuidor" placeholder="Ex: AVT, Bold Energy, Solfacil..." required>
+        <div class="error">Por favor, informe o nome do distribuidor</div>
       </div>
       <div class="lead-form-group" id="grp-estado">
         <label for="estado">Estado *</label>
@@ -427,11 +419,12 @@ function validateForm() {
     clearError('grp-area');
   }
   
-  // Distribuidor: at least one checkbox selected
-  var distribuidorChecks = document.querySelectorAll('input[name="distribuidor"]:checked');
-  var distribuidorValues = Array.from(distribuidorChecks).map(function(c) { return c.value; });
-  if (distribuidorValues.length === 0) {
-    setError('grp-distribuidor', 'Por favor, selecione pelo menos um distribuidor');
+  // Distribuidor: minimum 2 chars
+  var distribuidor = document.getElementById('distribuidor').value.trim();
+  if (!distribuidor) {
+    setError('grp-distribuidor', 'Por favor, informe o nome do distribuidor');
+  } else if (distribuidor.length < 2) {
+    setError('grp-distribuidor', 'Nome do distribuidor muito curto');
   } else {
     clearError('grp-distribuidor');
   }
@@ -467,15 +460,13 @@ function submitLeadForm(event) {
   btn.textContent = 'Enviando seus dados...';
   
   // Collect form data
-  var distribuidorChecks = document.querySelectorAll('input[name="distribuidor"]:checked');
-  var distribuidorValues = Array.from(distribuidorChecks).map(function(c) { return c.value; });
   var leadData = {
     nome: document.getElementById('nome').value.trim(),
     empresa: document.getElementById('empresa').value.trim(),
     telefone: document.getElementById('telefone').value.trim(),
     email: document.getElementById('email').value.trim(),
     area: document.getElementById('area').value,
-    distribuidor: distribuidorValues.join(', '),
+    distribuidor: document.getElementById('distribuidor').value.trim(),
     estado: document.getElementById('estado').value,
     cidade: document.getElementById('cidade').value.trim(),
     timestamp: new Date().toISOString()
