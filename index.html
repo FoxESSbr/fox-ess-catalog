@@ -622,14 +622,11 @@ function submitLeadForm(event) {
     }).catch(function(e) { console.log('Webhook Feishu error:', e); });
   } catch(e) { console.log('Send error:', e); }
 
-  // Libera a visualização do catálogo após o envio
+// Exibe o catálogo e fecha a tela de formulário
   setTimeout(function() {
     showCatalog();
   }, 500);
 
-  return false;
-}
-  
   return false;
 }
 
