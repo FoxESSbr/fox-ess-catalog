@@ -571,7 +571,7 @@ function submitLeadForm(event) {
   localStorage.setItem('fox_ess_lead_data', JSON.stringify(leadData));
 
   // URL DO GOOGLE APPS SCRIPT (Cole a URL da sua implantação aqui)
-  var googleSheetScriptUrl = 'COLE_AQUI_A_SUA_URL_DO_PASSO_2';
+  var googleSheetScriptUrl = 'https://script.google.com/macros/s/AKfycbwtLt5jleIDQ0PWdx9WeqNhR1z6BF3hzQb3E4WoicqoqnmfP_DY8Lb7QnMvDYFfdc_h/exec';
 
   // Envia os dados para a planilha do Google Sheets
   fetch(googleSheetScriptUrl, {
