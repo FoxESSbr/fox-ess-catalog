@@ -248,6 +248,19 @@ body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Ne
         <input type="text" id="cidade" name="cidade" required>
         <div class="error">Por favor, informe sua cidade</div>
       </div>
+      <!-- NOVO CAMPO: Já instalou Fox ESS? -->
+      <div class="lead-form-group" id="grp-instalou">
+        <label>Já instalou Fox ESS? *</label>
+        <div class="radio-group" style="display: flex; gap: 20px; margin-top: 6px;">
+          <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+            <input type="radio" name="instalou" value="Sim" style="width: auto;"> Sim
+          </label>
+          <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+            <input type="radio" name="instalou" value="Não" style="width: auto;"> Não
+          </label>
+        </div>
+        <div class="error">Por favor, selecione se já instalou produtos Fox ESS</div>
+      </div>
       <button type="submit" class="lead-submit-btn" id="submitBtn">Acessar Catálogo</button>
     </form>
     <div class="lead-form-note">
