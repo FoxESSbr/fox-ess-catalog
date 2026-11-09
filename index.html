@@ -204,11 +204,30 @@ body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Ne
         </select>
         <div class="error">Por favor, selecione sua área ou função</div>
       </div>
-      <div class="lead-form-group" id="grp-distribuidor">
-        <label for="distribuidor">Qual seu distribuidor? *</label>
-        <input type="text" id="distribuidor" name="distribuidor" placeholder="Digite o nome do seu distribuidor" required>
-        <div class="error">Por favor, informe o nome do distribuidor</div>
-      </div>
+
+<div class="lead-form-group" id="grp-distribuidor">
+  <label for="distribuidor">Qual seu distribuidor? *</label>
+  <select id="distribuidor" name="distribuidor" onchange="toggleDistribuidorOutro()" required>
+    <option value="">Selecione...</option>
+    <option value="AVT">AVT</option>
+    <option value="Bioenergy">Bioenergy</option>
+    <option value="Bold Energy">Bold Energy</option>
+    <option value="Fortlev">Fortlev</option>
+    <option value="JNG">JNG</option>
+    <option value="Solfacil">Solfacil</option>
+    <option value="Outros">Outros (Descrever)</option>
+    <option value="Prefiro não informar">Prefiro não informar</option>
+  </select>
+  <div class="error">Por favor, selecione seu distribuidor</div>
+</div>
+
+<!-- Campo condicional exibido apenas se "Outros" for selecionado -->
+<div class="lead-form-group" id="grp-distribuidor-outro" style="display: none;">
+  <label for="distribuidor_outro">Qual outro distribuidor? *</label>
+  <input type="text" id="distribuidor_outro" name="distribuidor_outro" placeholder="Especifique o distribuidor">
+  <div class="error">Por favor, informe o nome do distribuidor</div>
+</div>
+      
       <div class="lead-form-group" id="grp-estado">
         <label for="estado">Estado *</label>
         <select id="estado" name="estado" required>
@@ -380,7 +399,7 @@ Fox Hub G2 necessário</td></tr><tr><td>Tipo de Rede</td><td>Bifásico 127/220 V
   <a href="https://br.fox-ess.com/download/upfiles/BR-US-Datasheet-V1.3-20260724.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Datasheet US V1.3.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/PT-US-ESS-User-Manual-v1.1c.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Manual US V1.1.c.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/BR-INVERTER%20WARRANTY-20260430.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Garantia Inversores V3.1.pdf</a>
-  <a href=https://drive.google.com/file/d/1D53Ww0_7Z5AE2Lu47SUIx-2gJE3Gq7mq/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Manual de parametrização H1-US.pdf</a>
+  <a href="https://drive.google.com/file/d/1D53Ww0_7Z5AE2Lu47SUIx-2gJE3Gq7mq/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Manual de parametrização H1-US.pdf</a>
   <a href="https://drive.google.com/file/d/1W0s-6WMU103bS58moauawMbG_VkaQ389/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Declaração AFCI.pdf</a></div></div></div>
 
 <!-- H1-11.4-US -->  
@@ -968,7 +987,22 @@ AI Link Necessário</td></tr><tr><td>Tipo de Rede</td><td>Monofásico 220 V</td>
 </div>
 
 <script>
-// Check if user already filled the form
+// Alterna a exibição do campo condicional "Outro"
+function toggleDistribuidorOutro() {
+  var sel = document.getElementById('distribuidor').value;
+  var grpOutro = document.getElementById('grp-distribuidor-outro');
+  var inputOutro = document.getElementById('distribuidor_outro');
+  
+  if (sel === 'Outros') {
+    grpOutro.style.display = 'block';
+  } else {
+    grpOutro.style.display = 'none';
+    inputOutro.value = '';
+    grpOutro.classList.remove('has-error');
+  }
+}
+
+// Verifica se o usuário já preencheu o formulário anteriormente
 (function() {
   var leadData = localStorage.getItem('fox_ess_lead_data');
   if (leadData) {
@@ -981,17 +1015,20 @@ function validateForm() {
   
   function setError(grpId, msg) {
     var grp = document.getElementById(grpId);
-    grp.classList.add('has-error');
-    var errDiv = grp.querySelector('.error');
-    if (errDiv && msg) errDiv.textContent = msg;
+    if (grp) {
+      grp.classList.add('has-error');
+      var errDiv = grp.querySelector('.error');
+      if (errDiv && msg) errDiv.textContent = msg;
+    }
     valid = false;
   }
+
   function clearError(grpId) {
     var grp = document.getElementById(grpId);
-    grp.classList.remove('has-error');
+    if (grp) grp.classList.remove('has-error');
   }
   
-  // Nome: minimum 4 chars, at least 2 words
+  // Nome
   var nome = document.getElementById('nome').value.trim();
   if (!nome) {
     setError('grp-nome', 'Por favor, informe seu nome completo');
@@ -1003,7 +1040,7 @@ function validateForm() {
     clearError('grp-nome');
   }
   
-  // Empresa: minimum 3 chars
+  // Empresa
   var empresa = document.getElementById('empresa').value.trim();
   if (!empresa) {
     setError('grp-empresa', 'Por favor, informe o nome da empresa');
@@ -1013,47 +1050,58 @@ function validateForm() {
     clearError('grp-empresa');
   }
   
-  // Telefone: at least 8 digits
+  // Telefone
   var telefone = document.getElementById('telefone').value.trim();
   var phoneDigits = telefone.replace(/\D/g, '');
   if (!telefone) {
     setError('grp-telefone', 'Por favor, informe seu telefone');
   } else if (phoneDigits.length < 8) {
-    setError('grp-telefone', 'Telefone invalido (minimo 8 digitos)');
+    setError('grp-telefone', 'Telefone inválido (mínimo 8 dígitos)');
   } else {
     clearError('grp-telefone');
   }
   
-  // Email: valid format with proper domain
+  // Email
   var email = document.getElementById('email').value.trim();
   var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!email) {
     setError('grp-email', 'Por favor, informe seu e-mail');
   } else if (!emailRegex.test(email)) {
-    setError('grp-email', 'E-mail invalido (ex: nome@empresa.com.br)');
+    setError('grp-email', 'E-mail inválido (ex: nome@empresa.com.br)');
   } else {
     clearError('grp-email');
   }
   
-  // Area: must select
+  // Área
   var area = document.getElementById('area').value;
   if (!area) {
-    setError('grp-area', 'Por favor, selecione sua area ou funcao');
+    setError('grp-area', 'Por favor, selecione sua área ou função');
   } else {
     clearError('grp-area');
   }
   
-  // Distribuidor: minimum 3 chars
-  var distribuidor = document.getElementById('distribuidor').value.trim();
+  // Distribuidor
+  var distribuidor = document.getElementById('distribuidor').value;
   if (!distribuidor) {
-    setError('grp-distribuidor', 'Por favor, informe o nome do distribuidor');
-  } else if (distribuidor.length < 3) {
-    setError('grp-distribuidor', 'Nome do distribuidor muito curto');
+    setError('grp-distribuidor', 'Por favor, selecione seu distribuidor');
   } else {
     clearError('grp-distribuidor');
   }
+
+  if (distribuidor === 'Outros') {
+    var distribuidorOutro = document.getElementById('distribuidor_outro').value.trim();
+    if (!distribuidorOutro) {
+      setError('grp-distribuidor-outro', 'Por favor, especifique o distribuidor');
+    } else if (distribuidorOutro.length < 2) {
+      setError('grp-distribuidor-outro', 'Nome muito curto');
+    } else {
+      clearError('grp-distribuidor-outro');
+    }
+  } else {
+    clearError('grp-distribuidor-outro');
+  }
   
-  // Estado: must select
+  // Estado
   var estado = document.getElementById('estado').value;
   if (!estado) {
     setError('grp-estado', 'Por favor, selecione seu estado');
@@ -1061,7 +1109,7 @@ function validateForm() {
     clearError('grp-estado');
   }
   
-  // Cidade: minimum 3 chars
+  // Cidade
   var cidade = document.getElementById('cidade').value.trim();
   if (!cidade) {
     setError('grp-cidade', 'Por favor, informe sua cidade');
@@ -1069,6 +1117,21 @@ function validateForm() {
     setError('grp-cidade', 'Nome da cidade muito curto');
   } else {
     clearError('grp-cidade');
+  }
+
+  // Já instalou Fox ESS
+  var instalouRadios = document.getElementsByName('instalou');
+  var instalouChecked = false;
+  for (var i = 0; i < instalouRadios.length; i++) {
+    if (instalouRadios[i].checked) {
+      instalouChecked = true;
+      break;
+    }
+  }
+  if (!instalouChecked) {
+    setError('grp-instalou', 'Por favor, selecione se já instalou produtos Fox ESS');
+  } else {
+    clearError('grp-instalou');
   }
   
   return valid;
@@ -1083,34 +1146,45 @@ function submitLeadForm(event) {
   btn.disabled = true;
   btn.textContent = 'Enviando seus dados...';
   
-  // Coleta os dados do formulário
+  var selDistribuidor = document.getElementById('distribuidor').value;
+  var valorFinalDistribuidor = (selDistribuidor === 'Outros') 
+    ? 'Outros: ' + document.getElementById('distribuidor_outro').value.trim() 
+    : selDistribuidor;
+
+  var instalouVal = '';
+  var instalouRadios = document.getElementsByName('instalou');
+  for (var i = 0; i < instalouRadios.length; i++) {
+    if (instalouRadios[i].checked) {
+      instalouVal = instalouRadios[i].value;
+      break;
+    }
+  }
+
   var leadData = {
     nome: document.getElementById('nome').value.trim(),
     empresa: document.getElementById('empresa').value.trim(),
     telefone: document.getElementById('telefone').value.trim(),
     email: document.getElementById('email').value.trim(),
     area: document.getElementById('area').value,
-    distribuidor: document.getElementById('distribuidor').value.trim(),
+    distribuidor: valorFinalDistribuidor,
     estado: document.getElementById('estado').value,
     cidade: document.getElementById('cidade').value.trim(),
+    instalou_fox: instalouVal,
     timestamp: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
   };
   
-  // Salva localmente no navegador do usuário
   localStorage.setItem('fox_ess_lead_data', JSON.stringify(leadData));
 
-  // URL DO GOOGLE APPS SCRIPT (Cole a URL da sua implantação aqui)
+  // Envio ao Google Sheets
   var googleSheetScriptUrl = 'https://script.google.com/macros/s/AKfycbwtLt5jleIDQ0PWdx9WeqNhR1z6BF3hzQb3E4WoicqoqnmfP_DY8Lb7QnMvDYFfdc_h/exec';
-
-  // Envia os dados para a planilha do Google Sheets
   fetch(googleSheetScriptUrl, {
     method: 'POST',
-    mode: 'no-cors', // Evita bloqueios de política de CORS do navegador
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(leadData)
   }).catch(function(e) { console.log('Erro Google Sheets:', e); });
 
-  // Envia também para o Feishu (Mantendo o fluxo existente)
+  // Envio ao Feishu
   try {
     var webhookUrl = 'https://open.feishu.cn/open-apis/bot/v2/hook/134bcd93-991c-4ea1-a5b7-f10c4a9408cb';
     var msg = {
@@ -1131,7 +1205,8 @@ function submitLeadForm(event) {
               { is_short: true, text: { tag: 'lark_md', content: '**Área/Função**\n' + leadData.area } },
               { is_short: true, text: { tag: 'lark_md', content: '**Distribuidor**\n' + leadData.distribuidor } },
               { is_short: true, text: { tag: 'lark_md', content: '**Estado**\n' + leadData.estado } },
-              { is_short: true, text: { tag: 'lark_md', content: '**Cidade**\n' + leadData.cidade } }
+              { is_short: true, text: { tag: 'lark_md', content: '**Cidade**\n' + leadData.cidade } },
+              { is_short: true, text: { tag: 'lark_md', content: '**Já instalou Fox?**\n' + leadData.instalou_fox } }
             ]
           },
           {
@@ -1151,7 +1226,6 @@ function submitLeadForm(event) {
     }).catch(function(e) { console.log('Webhook Feishu error:', e); });
   } catch(e) { console.log('Send error:', e); }
 
-// Exibe o catálogo e fecha a tela de formulário
   setTimeout(function() {
     showCatalog();
   }, 500);
