@@ -41,6 +41,55 @@ body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Ne
 .company-intro p { color: #4a4a6a; font-size: 1em; line-height: 1.8; margin-bottom: 8px; }
 .company-intro .highlight-green { color: #8655FF; font-weight: 600; }
 
+.company-links-wrapper {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #E8E0FF;
+}
+.company-links-list {
+  list-style: none;
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.company-links-list li a {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #FFFFFF;
+  border: 1px solid #B69FFF;
+  border-radius: 8px;
+  color: #5B2EBC;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9em;
+  transition: all 0.2s;
+}
+.company-links-list li a:hover {
+  background: #8655FF;
+  color: #FFFFFF;
+  border-color: #8655FF;
+  transform: translateY(-1px);
+}
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 12px;
+}
+.social-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2E0059;
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
+}
+.social-badge:hover {
+  color: #8655FF;
+  transform: translateY(-2px);
+}
+  
 /* ===== CATEGORY SECTIONS ===== */
 .category-section { padding: 40px; max-width: 1400px; margin: 0 auto; }
 .category-header { font-size: 1.8em; font-weight: 700; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 3px solid; display: flex; align-items: center; gap: 12px; }
@@ -97,11 +146,6 @@ body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Ne
   background: #FFFFFF; border-radius: 24px; padding: 40px;
   max-width: 500px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   margin: auto 0; /* Centraliza verticalmente sem cortar o topo */
-}
-.lead-overlay.hidden { display: none; }
-.lead-form-container {
-  background: #FFFFFF; border-radius: 24px; padding: 40px;
-  max-width: 500px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 .lead-form-container img { max-width: 200px; display: block; margin: 0 auto 20px; }
 .lead-form-container h2 {
@@ -333,26 +377,28 @@ body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Ne
     </ul>
 
 <p style="margin-top: 16px;"><strong>Acompanhe a Fox ESS nas redes sociais:</strong></p>
-    <div class="social-links">
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/foxessdobrasil/?hl=en" target="_blank" rel="noopener noreferrer" class="social-badge">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      </a>
+   <div class="social-links">
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/foxessdobrasil/?hl=en" target="_blank" rel="noopener noreferrer" class="social-badge" title="Instagram Fox ESS do Brasil">
+    <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+  </a>
 
-      <!-- Facebook -->
-      <a href="https://web.facebook.com/FoxESSdobrasil/?_rdc=1&_rdr#" target="_blank" rel="noopener noreferrer" class="social-badge">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
-      </a>
+  <!-- Facebook -->
+  <a href="https://web.facebook.com/FoxESSdobrasil/?_rdc=1&_rdr#" target="_blank" rel="noopener noreferrer" class="social-badge" title="Facebook Fox ESS do Brasil">
+    <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+  </a>
 
-      <!-- LinkedIn -->
-      <a href="https://br.linkedin.com/company/fox-ess-brasil?trk=public_post_feed-actor-name" target="_blank" rel="noopener noreferrer" class="social-badge">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-      </a>
+  <!-- LinkedIn -->
+  <a href="https://br.linkedin.com/company/fox-ess-brasil?trk=public_post_feed-actor-name" target="_blank" rel="noopener noreferrer" class="social-badge" title="LinkedIn Fox ESS Brasil">
+    <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+  </a>
 
-      <!-- YouTube -->
-      <a href="https://www.youtube.com/@foxessglobal" target="_blank" rel="noopener noreferrer" class="social-badge">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      </a>
+  <!-- YouTube -->
+  <a href="https://www.youtube.com/@foxessglobal" target="_blank" rel="noopener noreferrer" class="social-badge" title="YouTube Fox ESS Global">
+    <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+  </a>
+</div>
+    
     </div>
 </div>
   
@@ -426,7 +472,7 @@ Fox Hub G2 necessário</td></tr><tr><td>Tipo de Rede</td><td>Bifásico 127/220 V
   <a href="https://br.fox-ess.com/download/upfiles/BR-US-Datasheet-V1.4-20261022.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Datasheet US V1.4.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/PT-US-ESS-User-Manual-v1.1c.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Manual US V1.1.c.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/BR-INVERTER%20WARRANTY-20260430.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Garantia Inversores V3.1.pdf</a>
-  <a href=https://drive.google.com/file/d/1D53Ww0_7Z5AE2Lu47SUIx-2gJE3Gq7mq/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Manual de parametrização H1-US.pdf</a>
+  <a href="https://drive.google.com/file/d/1D53Ww0_7Z5AE2Lu47SUIx-2gJE3Gq7mq/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Manual de parametrização H1-US.pdf</a>
   <a href="https://drive.google.com/file/d/1W0s-6WMU103bS58moauawMbG_VkaQ389/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Declaração AFCI.pdf</a></div></div></div>
 
 <!-- H1-7.5-US --> 
@@ -450,7 +496,7 @@ Fox Hub G2 necessário</td></tr><tr><td>Tipo de Rede</td><td>Bifásico 127/220 V
   <a href="https://br.fox-ess.com/download/upfiles/BR-US-Datasheet-V1.4-20261022.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Datasheet US V1.4.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/PT-US-ESS-User-Manual-v1.1c.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Manual US V1.1.c.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/BR-INVERTER%20WARRANTY-20260430.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Garantia Inversores V3.1.pdf</a>
-  <a href=https://drive.google.com/file/d/1D53Ww0_7Z5AE2Lu47SUIx-2gJE3Gq7mq/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Manual de parametrização H1-US.pdf</a>
+  <a href="https://drive.google.com/file/d/1D53Ww0_7Z5AE2Lu47SUIx-2gJE3Gq7mq/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Manual de parametrização H1-US.pdf</a>
   <a href="https://drive.google.com/file/d/1W0s-6WMU103bS58moauawMbG_VkaQ389/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Declaração AFCI.pdf</a></div></div></div>
 
 <!-- H3-Pro-20 -->  
@@ -550,7 +596,7 @@ AI Link Necessário</td></tr><tr><td>Tipo de Rede</td><td>Trifásico 127/220 V, 
       <a href="https://br.fox-ess.com/download/upfiles/BR-H3-Plus-Datasheet-V1.1-20250828.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Datasheet V1.1.pdf</a>
       <a href="https://br.fox-ess.com/download/upfiles/POR-H3-Plus%20&%20P3-Plus-User%20Manual-Fox-V1.0-BR.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Manual H3-Plus V1.0.pdf</a>
       <a href="https://br.fox-ess.com/download/upfiles/BR-INVERTER%20WARRANTY-20260430.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Garantia Inversores V3.1.pdf</a>
-      <a href=https://drive.google.com/file/d/1hGZt7EZLuaruyLOs3dfXrffjtZT4-rHF/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Acessorios por Cenario de Paralelismo - H3-Plus Plus - FoxESS.pdf</a>
+      <a href="https://drive.google.com/file/d/1hGZt7EZLuaruyLOs3dfXrffjtZT4-rHF/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Acessorios por Cenario de Paralelismo - H3-Plus Plus - FoxESS.pdf</a>
       <a href="https://drive.google.com/file/d/1uiLbv2G_ueCMgprCN-zRQA5lVPdDOTcS/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Manual de Modos de Operação.pdf</a>
       <a href="https://drive.google.com/file/d/1W0s-6WMU103bS58moauawMbG_VkaQ389/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">Declaração AFCI.pdf</a></div></div></div>
   
@@ -629,7 +675,7 @@ AI Link Necessário</td></tr><tr><td>Tipo de Rede</td><td>Trifásico 127/220 V, 
     <table class="specs"><tr><td>Potência (kW)</td><td>11.52</td></tr><tr><td>Capacidade (kWh)</td><td>11.52</td></tr><tr><td>Dimensões (mm)</td><td>710*640*185</td></tr><tr><td>Peso (kg)</td><td>98</td></tr><tr><td>Paralelismo</td><td>Até 4 por Entrada do Inversor;
  <br> Caixa de Junção Necessária</td></tr><tr><td>Compatibilidade</td><td>H1-G2, KH, H1-US, H3-Pro</td></tr><tr class="highlight"><td>INMETRO</td><td><strong>003400/2026</strong></td></tr><tr><td>NCM</td><td>8507.60.00</td></tr>
 <tr><td>Flexibilidade</td><td>Baterias EP12 podem ser paralelizadas com outras EP12 e com EP11</td></tr></table>
-</table><div class="documents"><h4>Documentos Disponíveis</h4>
+<div class="documents"><h4>Documentos Disponíveis</h4>
   <a href="https://br.fox-ess.com/download/upfiles/PT-EP12-Installation%20Guide-V1.0.0-20260311.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Guia De Instalação EP12 V1.0.0.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/BR-EP12-Datasheet-V1.0-20260131.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Datasheet EP12 V1.0.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/PT-EP6-12-User-Manual-V1.0.0-20260226.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Manual EP6 e EP12 V1.0.0.pdf</a>
@@ -671,7 +717,7 @@ AI Link Necessário</td></tr><tr><td>Tipo de Rede</td><td>Trifásico 127/220 V, 
 </div>
 
   
-<div class="category-section" id="aio"><div class="category-header" style="color:#25E577;border-color:#25E577;">AIO<span class="category-count">5 produtos</span></div>
+<div class="category-section" id="aio"><div class="category-header" style="color:#25E577;border-color:#25E577;">AIO<span class="category-count">6 produtos</span></div>
 
 <!-- P100-5-H -->  
 <div class="product-card"><div class="product-photo"><img src="data:image/jpeg;base64,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" alt="P100-5-H"></div>
@@ -752,7 +798,7 @@ AI Link Necessário</td></tr><tr><td>Tipo de Rede</td><td>Monofásico 220 V</td>
     <table class="specs"><tr><td>Potência (kW)</td><td>125</td></tr><tr><td>Capacidade (kWh)</td><td>241</td></tr><tr><td>Rastreadores MPPT</td><td>8</td></tr><tr><td>Dimensões (mm)</td><td>1040 * 2230 * 1500</td></tr><tr><td>Peso (kg)</td><td>2600</td></tr>
   <tr><td>Paralelismo</td><td>Até 15 (On-Grid); Até 5 (Backup e Off-Grid); <br> Para mais de 2 GMAX Plus em paralelo adquirir acessório adicional. <br> Consulte mais detalhes no documento abaixo</td></tr>
   <tr><td>Tipo de Rede</td><td>Trifásico 220/380 V</td></tr><tr class="highlight"><td>INMETRO</td><td><strong>003104/2026</strong></td></tr><tr><td>NCM</td><td>8504.40.40</td></tr><tr><td>Medidor/TCs Padrão</td><td><span class="tag tag-blue">30-803-00052-00 - CHINT DTSU666 — 3-Phase, Dual RS485, 600A/333mV (with Rogowski Coils)</span></td></tr>
-<td>Compatibilidade</td><td>Compatível com inversores On-grid de outros fabricantes na porta LOAD. Confirme caso a caso com nossa equipe técnica</td></tr>
+<tr><td>Compatibilidade</td><td>Compatível com inversores On-grid de outros fabricantes na porta LOAD. Confirme caso a caso com nossa equipe técnica</td></tr>
 </table><div class="documents"><h4>Documentos Disponíveis</h4>
   <a href="https://fox-ess-link.feishu.cn/file/X0VBbz2FVogXjKxnv0Icm5KrnIb" class="doc-item" target="_blank" rel="noopener noreferrer">10-500-20590-01 PT-G-MAX_Guia de Instalação Rápido-v1.1.pdf</a>
   <a href="https://br.fox-ess.com/download/upfiles/BR-G-MAX-Plus-Datasheet-V1.1-20260429.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">BR-G-MAX-Plus-Datasheet-BR-V1.pdf</a>
@@ -777,7 +823,7 @@ AI Link Necessário</td></tr><tr><td>Tipo de Rede</td><td>Monofásico 220 V</td>
       <tr class="highlight"><td>INMETRO</td><td><strong>EM BREVE</strong></td></tr>
       <tr><td>NCM</td><td>8504.40.40</td></tr>
       <tr><td>Medidor/TCs Padrão</td><td><span class="tag tag-blue">30-803-00052-00 - CHINT DTSU666 — 3-Phase, Dual RS485, 600A/333mV (with Rogowski Coils)</span></td></tr>
-<td>Compatibilidade</td><td>Compatível com inversores On-grid de outros fabricantes na porta LOAD. Confirme caso a caso com nossa equipe técnica</td></tr>
+<tr><td>Compatibilidade</td><td>Compatível com inversores On-grid de outros fabricantes na porta LOAD. Confirme caso a caso com nossa equipe técnica</td></tr>
 </table><div class="documents"><h4>Documentos Disponíveis</h4>
   <a href="https://drive.google.com/file/d/1C9zmJmU9g9Vb-je9Fq19HSm66jXp5avA/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">10-500-20590-01 PT-G-MAX_Guia de Instalação Rápido-v1.1.pdf</a>
   <a href="https://drive.google.com/file/d/110gHf01Is5UoLgRO3K5lzzhaBcAk91UP/view?usp=sharing" class="doc-item" target="_blank" rel="noopener noreferrer">BR-G-MAX-Plus-Datasheet-BR-V1.pdf</a>
@@ -816,7 +862,8 @@ AI Link Necessário</td></tr><tr><td>Tipo de Rede</td><td>Monofásico 220 V</td>
       <a href="https://br.fox-ess.com/download/upfiles/BR-Q-4-datasheet-V1.2-20260930.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Datasheet Q V1.2.pdf</a>
       <a href="https://br.fox-ess.com/download/upfiles/PT-Q-User-Manual-V1.0.2-20251225.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Manual Q V1.0.2.pdf</a>
       <a href="https://br.fox-ess.com/download/upfiles/Microinverter-WARRANTY-BR-PT-20250523.pdf" class="doc-item" target="_blank" rel="noopener noreferrer">Garantia Microinversores.pdf</a></div></div></div>
-
+</div>
+  
    <div class="category-section" id="inversor-string">
   <div class="category-header" style="color:#8655FF;border-color:#8655FF;">Inversor String On-Grid<span class="category-count">9 produtos</span></div>
      
